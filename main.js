@@ -111,11 +111,6 @@ const businesses = [
   }
 ];
 
-// const printToDom = (divId, textToPrint) => {
-//   const selectedDiv = document.querySelector(divId);
-//   selectedDiv.innerHTML = textToPrint;
-// };
-
 const outEl = document.querySelector('#output');
 // outEl.innerHTML = `<h1>Active Businesses</h1>`;
 
@@ -175,27 +170,27 @@ const outEl = document.querySelector('#output');
 
 // outEl.innerHTML += `<h1>Purchasing Agents</h1>`;
 
-const agents = businesses.map(business => {
-  const fullName = `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`;
-  const company = `${business.companyName}`;
-  const phoneNumber = `${business.phoneWork}`;
-  const obj = {
-    fullName,
-    company,
-    phoneNumber,
-  }
-  return obj;
-});
+// const agents = businesses.map(business => {
+//   const fullName = `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`;
+//   const company = `${business.companyName}`;
+//   const phoneNumber = `${business.phoneWork}`;
+//   const obj = {
+//     fullName,
+//     company,
+//     phoneNumber,
+//   }
+//   return obj;
+// });
 
-console.table(agents);
+// console.table(agents);
 
-agents.forEach(agent => {
-  outEl.innerHTML += `<h2>${agent.fullName}</h2>
-                      <h3>${agent.company}</h3>
-                      <h3>${agent.phoneNumber}</h3>`;
+// agents.forEach(agent => {
+//   outEl.innerHTML += `<h2>${agent.fullName}</h2>
+//                       <h3>${agent.company}</h3>
+//                       <h3>${agent.phoneNumber}</h3>`;
 
-  outEl.innerHTML += `<hr/>`;
-});
+//   outEl.innerHTML += `<hr/>`;
+// });
 
 
 // document
@@ -224,13 +219,54 @@ agents.forEach(agent => {
 //         }
 //     });
 
-document.querySelector('#companySearch').addEventListener('keypress', keyPressEvent => {
-  if (keyPressEvent.charCode === 13) {
-    const foundAgents = agents.find(business => {
-      business.fullName.includes(keyPressEvent.target.value);
-      outEl.innerHTML = `<h2>${foundAgents.fullName}</h2>
-                          <h3>${foundAgents.company}</h3>
-                          <h3>${foundAgents.phoneNumber}</h3>`
-    });
-  };
+// document.querySelector('#companySearch').addEventListener('keypress', keyPressEvent => {
+//   if (keyPressEvent.charCode === 13) {
+//     const foundAgents = agents.find(business => {
+//       business.fullName.includes(keyPressEvent.target.value);
+//       outEl.innerHTML = `<h2>${foundAgents.fullName}</h2>
+//                           <h3>${foundAgents.company}</h3>
+//                           <h3>${foundAgents.phoneNumber}</h3>`
+//     });
+//   };
+// });
+
+// let totalOrders = business.orders.reduce(
+//   (currentTotal, nextValue) => currentTotal += nextValue,
+//   0
+// )
+
+// const monthlyRainfall = [23, 13, 27, 20, 20, 31, 33, 26, 19, 12, 14, 12, 10]
+
+// const totalRainfall = monthlyRainfall.reduce(
+//   (currentTotal, nextValue) => currentTotal += nextValue,
+//   0
+// )
+
+// console.log(totalRainfall)
+
+// const words = ["The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"]
+
+// const sentence = words.reduce(
+//   (currentWord, nextWord) => currentWord += nextWord,
+// )
+
+// console.log(sentence)
+
+const bigSpenders = businesses.filter(business => {
+  let nineThousand = false;
+  business.orders.forEach(order => {
+    if (order >= 9000) {
+      nineThousand = true;
+    }
+  });
+  return nineThousand;
+});
+
+outEl.innerHTML = `<h1>Big Spenders</h1>`
+bigSpenders.forEach(bigSpender => {
+  outEl.innerHTML += `<h2>${bigSpender.companyName}</h2>
+                      <section>${bigSpender.addressFullStreet}</section>
+                      <section>
+                      ${bigSpender.addressCity}, ${bigSpender.addressStateCode} ${bigSpender.addressZipCode}
+                      </section>`
 });
