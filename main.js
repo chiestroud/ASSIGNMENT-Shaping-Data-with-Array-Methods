@@ -173,7 +173,7 @@ const outEl = document.querySelector('#output');
 //   outEl.innerHTML += `<hr/>`
 // });
 
-outEl.innerHTML += `<h1>Purchasing Agents</h1>`;
+// outEl.innerHTML += `<h1>Purchasing Agents</h1>`;
 
 const agents = businesses.map(business => {
   const fullName = `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`;
@@ -195,4 +195,42 @@ agents.forEach(agent => {
                       <h3>${agent.phoneNumber}</h3>`;
 
   outEl.innerHTML += `<hr/>`;
+});
+
+
+// document
+//     .querySelector("#companySearch")
+//     .addEventListener("keypress", keyPressEvent => {
+//         if (keyPressEvent.charCode === 13) {
+//             const foundBusiness = businesses.find(
+//                 business =>
+//                     business.companyName.includes(keyPressEvent.target.value)
+//             );
+
+//             outEl.innerHTML = `
+//                 <h2>
+//                 ${foundBusiness.companyName}
+//                 </h2>
+//                 <section>
+//                 ${foundBusiness.addressFullStreet}
+
+//                 </section>
+//                 <section>
+//                 ${foundBusiness.addressCity},
+//                 ${foundBusiness.addressStateCode}
+//                 ${foundBusiness.addressZipCode}
+//                 </section>
+//             `;
+//         }
+//     });
+
+document.querySelector('#companySearch').addEventListener('keypress', keyPressEvent => {
+  if (keyPressEvent.charCode === 13) {
+    const foundAgents = agents.find(business => {
+      business.fullName.includes(keyPressEvent.target.value);
+      outEl.innerHTML = `<h2>${foundAgents.fullName}</h2>
+                          <h3>${foundAgents.company}</h3>
+                          <h3>${foundAgents.phoneNumber}</h3>`
+    });
+  };
 });
